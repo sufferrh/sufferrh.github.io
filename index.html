@@ -1,250 +1,11 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Radiohead Fan Site</title>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --accent-blue: #38b6ff;
-      --soft-blue: #23283a;
-      --text-white: #eaf0ff;
-      --bg-black: #111114;
-      --grey: #757883;
-    }
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-      font-family: 'IBM Plex Mono', monospace;
-      background: var(--bg-black) url('https://static.tildacdn.com/tild3937-6133-4862-b232-363561396133/noise_texture.png');
-      background-size: repeat;
-      color: var(--text-white);
-      letter-spacing: 0.01em;
-    }
-#video-bg {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  width: 100vw;
-  height: 100vh;
-  min-width: 100vw;
-  min-height: 100vh;
-  object-fit: cover;
-  transform: translate(-50%, -50%);
-  z-index: -1;
-  pointer-events: none;
-  filter: brightness(0.65) grayscale(0.07) blur(5px);
-  transition: filter 0.4s, transform 0.25s cubic-bezier(.58,.1,.8,.68);
-  background: #161821;
-}
-    .hero {
-      min-height: 100vh;
-      width: 100vw;
-      display: flex;
-      flex-direction: column;
-      justify-content:center;
-      align-items:center;
-      padding: 8vw 0 0 0;
-      box-sizing: border-box;
-      position:relative;
-      max-width: 100vw;
-      overflow-x: hidden;
-    }
-    .radiohead-title {
-      font-family: 'IBM Plex Mono', monospace;
-      font-weight: 700;
-      font-size: clamp(2.2rem, 7vw, 5.5rem);
-      text-transform: uppercase;
-      letter-spacing: 0.13em;
-      color: var(--text-white);
-      position: relative;
-      text-align: center;
-      line-height: 1.05;
-      margin-bottom: min(6vw,90px);
-      user-select: none;
-      word-break: break-word;
-      width: 90vw;
-      max-width: 98vw;
-      text-shadow: 0 2px 24px #233a5a66, 0 0 5px #38b6ff55, 0 0 1px #000d;
-    }
-    .radiohead-title::after {
-      content: ' /// RADIOHEAD /// ';
-      position: absolute; left:50%; top:0; width:100%;
-      transform: translateX(-50%) translateY(-56%);
-      color: #38b6ff60;
-      opacity:0.19; font-size: 90%; pointer-events: none;
-      mix-blend-mode: hard-light;
-      letter-spacing: .46em;
-      z-index: -1;
-      word-break: break-all;
-      max-width:100vw;
-    }
-    .subtitle {
-      font-size: 1.06rem;
-      color: var(--grey);
-      letter-spacing: 0.08em;
-      max-width: 90vw;
-      text-align:center;
-      margin-bottom: min(6vw,42px);
-      font-weight:400;
-      opacity:.85;
-    }
-    .hero-sep {
-      width: 92vw;
-      max-width: 400px;
-      border:none;
-      border-top: 2.5px solid #2b324a;
-      margin: min(2vw,32px) 0 min(3vw,56px) 0;
-      opacity:.45;
-      box-shadow: 0 0 7px #284d7e55;
-    }
-    .about-block {
-      font-size: 1.03em;
-      color: var(--text-white);
-      background: rgba(18,20,30,0.66);
-      border-radius: 20px 1.1em;
-      border-left: 7px solid #20293f;
-      max-width: 92vw;
-      margin: 0 auto min(3vw,32px) auto;
-      padding: 7vw 5vw 3vw 6vw;
-      box-shadow: 0 3px 26px #223d60aa, 0 2px 6px #223d603c;
-      line-height: 1.62;
-      font-weight: 400;
-      position:relative;
-      backdrop-filter: blur(1.5px);
-      box-sizing: border-box;
-      word-break: break-word;
-    }
-    .about-block strong { color: var(--accent-blue); font-weight:700; }
-    /* Lyrics block */
-    .lyrics-block {
-      position: relative;
-      margin:6vw 0 0 0;
-      border-radius: 17px;
-      overflow: hidden;
-      box-shadow: 0 9px 34px #16203d42, 0 2px 5px #222b3c1a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 170px;
-      width: 96vw;
-      max-width: 430px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #1a2331;
-      box-sizing: border-box;
-    }
-    .lyrics-bg {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 100%;
-      height: 100%;
-      min-width: 100%;
-      min-height: 100%;
-      object-fit: cover;
-      object-position: center center;
-      transform: translate(-50%, -50%);
-      z-index: 0;
-      opacity: 0.37;
-      filter: grayscale(0.14) blur(1.2px) contrast(1.08) brightness(.82);
-      transition: filter 0.9s;
-    }
-    .lyrics-inner {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 7vw 5vw;
-      background: linear-gradient(120deg,rgba(19,25,42,0.68) 83%,rgba(29,21,48,.12) 100%);
-      color: #eaf5ff;
-      font-size: 1.06em;
-      font-family: 'IBM Plex Mono', monospace;
-      text-align: center;
-      line-height: 1.34;
-      text-shadow:0 2px 8px #0f219175;
-      min-height: 77px;
-      box-sizing: border-box;
-      word-break: break-word;
-    }
-    /* Glitch effect on mobile is soft */
-    .animated-lyrics span {
-      display:inline-block;
-      animation: glitch-letters 2.7s infinite alternate;
-      will-change: filter,transform;
-    }
-    @keyframes glitch-letters {
-      0% { filter:none; }
-      9% { filter:blur(.2px) brightness(.92);}
-      14% { filter:drop-shadow(-1.3px 0 var(--accent-blue)); transform: translateX(-0.8px);}
-      18% { filter:none; transform:none;}
-      34% { filter:drop-shadow(1.3px 0 #fff); }
-      38% { filter:none; }
-      62% { filter:blur(0.2px);}
-      77% { filter:none;}
-      100% { filter:none;}
-    }
-    /* Кнопки */
-    .tg-links { display:flex;flex-direction:column;gap:17px;align-items:center;justify-content:center;margin:6vw 0 4vw 0;}
-    .tg-btn {
-      display:block;padding:13px 24px;
-      background: linear-gradient(90deg,#232d43 5%,#1b89c5 99%);
-      color:#fff;border:none;text-decoration:none;
-      border-radius:13px;
-      font-family:'IBM Plex Mono',monospace;
-      font-size:1.05em;letter-spacing:.04em;
-      font-weight:700;
-      box-shadow:0 5px 15px #092d4a40,0 1.5px 4px #3be3f044;
-      transition:transform .16s, box-shadow .18s;
-      outline:none;cursor:pointer;
-      width: 88vw;
-      max-width: 320px;
-      text-align: center;
-    }
-    .tg-btn:hover {box-shadow:0 8px 21px #58cfff55,0 2px 8px #1779d399;transform:scale(1.02);}
-    @media (min-width:501px) {
-      .lyrics-block, .about-block, .tg-btn { max-width: 420px; }
-      .tg-links{flex-direction:row;gap:28px;}
-      .tg-btn { width: auto;}
-    }
-  </style>
-</head>
-<body>
-  <video id="video-bg" src="bgvideo.mp4" autoplay loop muted playsinline></video>
-  <section class="hero">
-    <h1 class="radiohead-title">RADIOHEAD</h1>
-    <div class="subtitle">Фанатский кинематографичный архив, вдохновленный экспериментальной меланхолией и цифровым брутализмом.</div>
-    <hr class="hero-sep">
-    <div class="about-block">
-      Radiohead – это группа, известная своей музыкальной красотой, глубокими экспериментами и постоянным стремлением раздвигать границы жанров.
-      <br><br><strong>Факты о Radiohead:</strong>
-      <br>Название группы: в честь песни "Radio Head" группы Talking Heads.
-      <br>Состав: Том Йорк, Джонни Гринвуд, Эд О'Брайен, Колин Гринвуд, Фил Селуэй.
-      <br>Неожиданный хит: "Creep" был записан по предложению продюсеров.
-      <br>Цифровые пионеры: выпуск In Rainbows в 2007 по принципу «заплати сколько хочешь».
-      <br>Том Йорк не умеет читать ноты, несмотря на сложность их музыки.
-      <br><br>
-      <strong>Красота и экспериментальность:</strong>
-      <br>Постоянный поиск и эволюция звучания.
-      <br>Многослойность и необычные текстуры.
-      <br>Слияние рок, электроники, джаза, классики, пост-панка.
-      <br>Эмоциональное воздействие – темы отчуждения, технологий, тревоги.
-    </div>
-    <div class="lyrics-block">
-      <img class="lyrics-bg" src="https://i.pinimg.com/originals/7e/46/1c/7e461cae4cb5467e593226089f33b6fb.jpg" alt="background">
-      <div class="lyrics-inner animated-lyrics">
+<Div class="lyrics-inner animated-lyrics">
         <span>The raindrops, the raindrops, the raindrops, the raindrops</span><br>
         <span>The raindrops, the raindrops, the raindrops, the raindrops</span><br>
         <span>The raindrops, the raindrops, the raindrops, the raindrops</span><br>
         <span>The raindrops, the raindrops, the raindrops, the raindrops</span>
       </div>
     </div>
+    <!-- Лирика 2 -->
     <div class="lyrics-block">
       <img class="lyrics-bg" src="https://images.genius.com/82bd78696ff4ea2ba840a20b9f7cfe74.1000x1000x1.png" alt="background">
       <div class="lyrics-inner animated-lyrics">
@@ -253,6 +14,7 @@
         <span>At least 'til the disappointed have eaten themselves away</span>
       </div>
     </div>
+    <!-- Лирика 3 -->
     <div class="lyrics-block">
       <img class="lyrics-bg" src="https://images.genius.com/454225af5aece416ebdfa8c0e7323cf1.1000x1000x1.jpg" alt="background">
       <div class="lyrics-inner animated-lyrics">
@@ -260,6 +22,7 @@
         <span>Where two and two always makes up five</span>
       </div>
     </div>
+    <!-- Лирика 4 -->
     <div class="lyrics-block">
       <img class="lyrics-bg" src="https://cdn-image.zvuk.com/pic?hash=4a166b71-93e9-4f29-9315-8731df354319&id=20060965&size=medium&type=release" alt="background">
       <div class="lyrics-inner animated-lyrics">
@@ -267,18 +30,19 @@
         <span>I'm not here, I'm not here</span>
       </div>
     </div>
+
     <div class="tg-links">
-      <a href="https://t.me/sufferrh" target="_blank" rel="noopener" class="tg-btn">My Tgc</a>
-      <a href="https://t.me/gdesuffer" target="_blank" rel="noopener" class="tg-btn">My username</a>
+      <a href="https://t.me/sufferrh" target="_blank" rel="noopener" class="tg-btn">Мой Telegram канал</a>
+      <a href="https://t.me/gdesuffer" target="_blank" rel="noopener" class="tg-btn">Мой Telegram</a>
     </div>
   </section>
   <script>
     // Параллакс-фон по движению мышки
     const video = document.getElementById('video-bg');
     document.addEventListener('mousemove', e => {
-      const px = (e.clientX / window.innerWidth - 0.5) * 18;
-      const py = (e.clientY / window.innerHeight - 0.5) * 18;
-      video.style.transform = `translate(-50%, -50%) scale(1.03) translate(${px}px, ${py}px)`;
+      const px = (e.clientX / window.innerWidth - 0.5) * 24; // px max +/-12
+      const py = (e.clientY / window.innerHeight - 0.5) * 24;
+      video.style.transform = translate(-50%, -50%) scale(1.03) translate(${px}px, ${py}px);
     });
     window.addEventListener('mouseleave', ()=>{
       video.style.transform = 'translate(-50%, -50%) scale(1.03) translate(0,0)';
