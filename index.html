@@ -1,35 +1,229 @@
+ㅤ sufferrrr𓍼, [09.11.2025 18:57]
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>In Rainbows Tribute</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Radiohead In Rainbows Tribute</title>
+  <!-- Neon rainbow Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    html, body {height:100%;margin:0;padding:0;}
     body {
-      background: black;
-      color: #FF911B;
-      font-family: 'Arial Black', Arial, sans-serif;
-      text-align: center;
-      margin-top: 100px;
+      min-height:100vh;
+      background: #000;
+      overflow-x: hidden;
+      color: #fff;
+      font-family: 'Roboto Mono', 'Arial', monospace;
+    }
+    .rainbow-bg {
+      position:fixed; z-index:-1; top:0; left:0; width:100vw; height:100vh;
+      pointer-events:none;
+      animation: hueRotate 12s linear infinite;
+    }
+    @keyframes hueRotate {100%{filter:hue-rotate(360deg)}}
+    .container {
+      width:100vw; max-width:900px; margin:0 auto; padding:35px 0 90px 0;
     }
     h1 {
-      font-size: 3em;
-      letter-spacing: .1em;
-      background: linear-gradient(
-        90deg,
-        #FF8C00 0%, #FFE600 25%, #00CFFF 50%, #FF2EDB 75%, #29FF35 100%
-      );
+      font-family: 'Rubik Mono One', Arial, sans-serif;
+      font-size:2.7em;
+      letter-spacing:0.12em;
+      background: linear-gradient(90deg, #ffe600 0%, #ff8c00 20%, #ff2edb 40%, #29ff35 65%, #00cfff 85%, #ffe600 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: rainbow-fade 3s infinite alternate;
+      filter: blur(0.7px) drop-shadow(0 0 6px #ff911bbf);
+      text-align:center;
+      margin-bottom:24px;
+      text-shadow: 0 2px 32px #ffe600bb, 0 0 10px #29ff3533;
     }
-    @keyframes rainbow-fade {
-      0% { filter: blur(0px);}
-      100% { filter: blur(4px);}
+    .about {
+      font-size:1.17em;
+      margin-bottom: 50px;
+      text-align: center;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height:1.6;
     }
+    .lyrics-block {
+      background: rgba(22,22,22,0.57);
+      border-radius: 1.2em;
+      margin: 24px auto 24px auto;
+      padding: 24px 36px;
+      max-width: 480px;
+      box-shadow: 0 3px 28px 6px #2228, 0 0 6px #ffe60077;
+      border: 1.7px solid #fff2;
+      position: relative;
+    }
+    .lyrics-block .dots {
+      position:absolute; left:20px; top:19px; display:flex; gap:7px;
+    }
+    .lyrics-block .dot {width:10px; height:10px; border-radius:50%; display:inline-block;}
+    .spotify { background:#1ed760; }
+    .yellow { background:#ffe600;}
+    .orange {background: #ff8c00;}
+    .cyan {background: #00cfff;}
+    .lyrics {
+      font-family: 'Roboto Mono', monospace;
+      font-size:1em;
+      color: #fffde7;
+      margin-top: 18px;
+      line-height: 1.9;
+      white-space: pre-line;
+      text-align:left;
+      text-shadow:0 0 12px #2226, 0 0 7px #ffe600bb;
+    }
+    /* Mobile responsive */
+    @media (max-width:600px){
+      .lyrics-block {max-width:98vw;padding:18px 7vw;}
+      .about{max-width:95vw;}
+      h1{font-size:2em;}
+    }
+    .links {
+      display:flex; flex-direction: row; gap:24px; justify-content:center; margin-top:38px;
+      flex-wrap: wrap;
+    }
+    .tg-btn {
+      border:none; outline:none;
+      background: linear-gradient(125deg, #00cfff, #ffe600 100%);
+      color: #000;
+      font-family: 'Rubik Mono One', Arial, sans-serif;
+      font-size:1.02em;
+      letter-spacing:0.01em;
+      border-radius: 7px;
+      padding: 16px 29px;
+      cursor:pointer;
+      transition: transform 0.13s, filter 0.18s;
+      font-weight:700;
+      box-shadow: 0 3px 18px #00ffd977,0 1px 4px #ffe60044;
+      margin-bottom:24px;
+      text-decoration: none;
+      display:inline-block;
+    }
+    .tg-btn:hover {filter:brightness(120%) blur(0.5px); transform:scale(1.07);}
+    /* Rainbow animated overlay, canvas (JS) */
+    #rainbowCanvas {position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:0;}
   </style>
 </head>
 <body>
+
+<canvas id="rainbowCanvas"></canvas>
+
+<div class="container">
   <h1>RADIOHEAD — IN RAINBOWS</h1>
-  <p>Добро пожаловать на мой рх сайт!</p>
+
+  <div class="about">
+    Radiohead — культовая британская группа, новаторы альтернативной сцены, объединившие умные тексты с уникальными звуковыми экспериментами. Их творчество — это мост между эмоциональностью и технологиями, а альбом "In Rainbows" стал легендарным примером музыкальной свободы, смены стилей и самоиронии. </Div>
+
+ㅤ sufferrrr𓍼, [09.11.2025 18:57]
+<Div class="lyrics-block">
+    <div class="dots">
+      <div class="dot spotify"></div>
+      <div class="dot yellow"></div>
+      <div class="dot orange"></div>
+      <div class="dot cyan"></div>
+    </div>
+    <div class="lyrics">
+The raindrops, the raindrops,
+the raindrops, the raindrops
+The raindrops, the raindrops,
+the raindrops, the raindrops
+The raindrops, the raindrops,
+the raindrops, the raindrops
+The raindrops, the raindrops,
+the raindrops, the raindrops
+    </div>
+  </div>
+
+  <div class="lyrics-block">
+    <div class="dots">
+      <div class="dot spotify"></div>
+      <div class="dot yellow"></div>
+      <div class="dot orange"></div>
+      <div class="dot cyan"></div>
+    </div>
+    <div class="lyrics">
+And add some sparkles to
+create the right effect
+And they're all smiling, so I
+guess I'll stay
+At least 'til the disappointed
+have eaten themselves away
+    </div>
+  </div>
+
+  <div class="lyrics-block">
+    <div class="dots">
+      <div class="dot spotify"></div>
+      <div class="dot yellow"></div>
+      <div class="dot orange"></div>
+      <div class="dot cyan"></div>
+    </div>
+    <div class="lyrics">
+I'll stay home forever
+Where two and two always makes up five
+    </div>
+  </div>
+
+  <div class="lyrics-block">
+    <div class="dots">
+      <div class="dot spotify"></div>
+      <div class="dot yellow"></div>
+      <div class="dot orange"></div>
+      <div class="dot cyan"></div>
+    </div>
+    <div class="lyrics">
+This isn't happening
+I'm not here, I'm not here
+    </div>
+  </div>
+
+  <div class="links">
+    <a href="https://t.me/YOUR_CHANNEL" class="tg-btn" target="_blank" rel="noopener">Мой Telegram-канал</a>
+    <a href="https://t.me/YOUR_USERNAME" class="tg-btn" target="_blank" rel="noopener">Мой Telegram</a>
+  </div>
+</div>
+
+<!-- JS-анимация радужных пятен -->
+<script>
+const canvas = document.getElementById('rainbowCanvas');
+const ctx = canvas.getContext('2d');
+function r() {return Math.random()}
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+// Радужные "пятна"
+let spots = [];
+for(let i=0;i<7;i++){
+  spots.push({
+    x: r()*canvas.width, y: r()*canvas.height,
+    r: 130+r()*90, col: hsl(${r()*360},96%,53%),
+    dx: (r()-.5)*1.5, dy:(r()-.5)*1.5, dr:(r()-.5)*.2
+  });
+}
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let s of spots){
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+    ctx.fillStyle = s.col;
+    ctx.globalAlpha = 0.13 + 0.11 * Math.sin(performance.now()/1330 + s.x);
+    ctx.shadowColor = s.col;
+    ctx.shadowBlur = 60;
+    ctx.fill();
+    ctx.globalAlpha=1; ctx.shadowBlur=0;
+    s.x += s.dx; s.y+=s.dy; s.r+=s.dr;
+    if(s.x<0||s.x>canvas.width) s.dx*=-1;
+    if(s.y<0||s.y>canvas.height) s.dy*=-1;
+    if(s.r<80||s.r>210) s.dr*=-1;
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
 </body>
 </html>
