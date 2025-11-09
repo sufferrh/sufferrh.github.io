@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>In Rainbows Tribute</title>
+  <style>
+    body {
+      background: black;
+      color: #FF911B;
+      font-family: 'Arial Black', Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    h1 {
+      font-size: 3em;
+      letter-spacing: .1em;
+      background: linear-gradient(
+        90deg,
+        #FF8C00 0%, #FFE600 25%, #00CFFF 50%, #FF2EDB 75%, #29FF35 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow-fade 3s infinite alternate;
+    }
+    @keyframes rainbow-fade {
+      0% { filter: blur(0px);}
+      100% { filter: blur(4px);}
+    }
+  </style>
+</head>
+<body>
+  <h1>RADIOHEAD — IN RAINBOWS</h1>
+  <p>Добро пожаловать на мой рх сайт!</p>
+</body>
+</html>
