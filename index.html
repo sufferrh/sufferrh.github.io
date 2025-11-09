@@ -111,15 +111,20 @@
     }
     .about-block strong { color: var(--accent-blue); font-weight:700; }
     /* Song lyrics block - spotify lyric display imitation */
-    .lyrics-block {
-      position: relative;
-      margin:5vw 0 0 0;
-      min-height: min(250px,54vw); 
-      border-radius: 18px;
-
-Overflow: hidden;
-      box-shadow: 0 9px 54px #16203d44, 0 2px 9px #222b3c2a;
-    }
+   .Lyrics-bg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  opacity: 0.37;
+  filter: grayscale(0.17) blur(1.5px) contrast(1.08) brightness(.79);
+  transition: filter 0.9s;
+}
    .Lyrics-bg {
   position: absolute;
   left: 50%;
