@@ -1,3 +1,221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Radiohead Fan Site</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent-blue: #38b6ff;
+      --soft-blue: #23283a;
+      --text-white: #eaf0ff;
+      --bg-black: #111114;
+      --grey: #757883;
+    }
+    html, body {height:100%;margin:0;padding:0;}
+    body {
+      min-height:100vh;
+      background: var(--bg-black) url('https://static.tildacdn.com/tild3937-6133-4862-b232-363561396133/noise_texture.png');
+      background-size: repeat;
+      color: var(--text-white);
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.01em;
+      overflow-x: hidden;
+    }
+    /* Параллакс-видео-фон */
+    #video-bg {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      width: 100vw;
+      height: 100vh;
+      min-width: 100vw;
+      min-height: 100vh;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      pointer-events: none;
+      filter: brightness(0.65) grayscale(0.07) blur(5px);
+      transition: filter 0.4s, transform 0.25s cubic-bezier(.58,.1,.8,.68);
+      background: #161821;
+    }
+    .hero {
+      min-height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      justify-content:center;
+      align-items:center;
+      padding: 8vw 0 0 0;
+      position:relative;
+    }
+    /* Бруталистский header */
+    .radiohead-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 700;
+      font-size: clamp(2.2rem, 7vw, 5.5rem);
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: var(--text-white);
+      position: relative;
+      text-align: center;
+      line-height: 1.05;
+      margin-bottom: min(6vw,90px);
+      user-select: none;
+      text-shadow: 0 2px 24px #233a5a66, 0 0 5px #38b6ff55, 0 0 1px #000d;
+    }
+    .radiohead-title::after {
+      content: ' /// RADIOHEAD /// ';
+      position: absolute; left:50%; top:0; width:100%;
+      transform: translateX(-50%) translateY(-56%);
+      color: #38b6ff60;
+      opacity:0.19; font-size: 90%; pointer-events: none;
+      mix-blend-mode: hard-light;
+      letter-spacing: .46em;
+      z-index: -1;
+    }
+    .subtitle {
+      font-size: 1.24rem;
+      color: var(--grey);
+      letter-spacing: 0.08em;
+      max-width: max(400px, 53vw);
+      text-align:center;
+      margin-bottom: min(6vw,52px);
+      font-weight:400;
+      opacity:.85;
+    }
+    .hero-sep {
+      width: 95vw; max-width: 1220px;
+      border:none;
+      border-top: 2.5px solid #2b324a;
+      margin: min(3vw,45px) 0 min(4vw,76px) 0;
+      opacity:.45;
+      box-shadow: 0 0 12px #284d7e55;
+    }
+    .about-block {
+      font-size: 1.12em;
+      color: var(--text-white);
+      background: rgba(18,20,30,0.66);
+      border-radius: 22px 1.6em;
+      border-left: 9px solid #20293f;
+      max-width: 620px;
+      margin: 0 auto min(4vw,54px) auto;
+      padding: 52px 4vw 33px 5vw;
+      box-shadow: 0 3px 36px #223d60aa, 0 2px 8px #223d603c;
+      line-height: 1.68;
+      font-weight: 400;
+      position:relative;
+      backdrop-filter: blur(1.5px);
+      box-sizing: border-box;
+    }
+    .about-block strong { color: var(--accent-blue); font-weight:700; }
+    /* Lyrics block */
+    .lyrics-block {
+      position: relative;
+      margin:5vw 0 0 0;
+      min-height: min(250px,54vw); 
+      border-radius: 19px;
+      overflow: hidden;
+      box-shadow: 0 9px 54px #16203d44, 0 2px 9px #222b3c2a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lyrics-bg {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 100%;
+
+
+Height: 100%;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      opacity: 0.37;
+      filter: grayscale(0.17) blur(1.5px) contrast(1.08) brightness(.79);
+      transition: filter 0.9s;
+    }
+    .lyrics-inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 38px 4vw;
+      background: linear-gradient(120deg,rgba(19,25,42,0.62) 80%,rgba(29,21,48,.18) 100%);
+      color: #eaf5ff;
+      font-size: 1.18em;
+      font-family: 'IBM Plex Mono', monospace;
+      text-align: center;
+      line-height: 1.5;
+      text-shadow:0 2px 8px #0f2191a9;
+      min-height: 110px;
+    }
+    /* Анимированный lyrics эффект (слегка glitch) */
+    .animated-lyrics span {
+      display:inline-block;
+      animation: glitch-letters 2.5s infinite alternate;
+      will-change: filter,transform;
+    }
+    @keyframes glitch-letters {
+      0% { filter:none; }
+      9% { filter:blur(.4px) brightness(.94);}
+      14% { filter:drop-shadow(-2.5px 0 var(--accent-blue)); transform: translateX(-1px);}
+      18% { filter:none; transform:none;}
+      34% { filter:drop-shadow(2.1px 0 #fff); }
+      38% { filter:none; }
+      62% { filter:blur(0.4px);}
+      77% { filter:none;}
+      100% { filter:none;}
+    }
+    /* Кнопки */
+    .tg-links { display:flex;flex-direction:row;gap:28px;justify-content:center;margin:54px 0 44px 0;}
+    .tg-btn {
+      display:block;padding:17px 33px;
+      background: linear-gradient(90deg,#232d43 5%,#1b89c5 99%);
+      color:#fff;border:none;text-decoration:none;
+      border-radius:14px;
+      font-family:'IBM Plex Mono',monospace;
+      font-size:1.07em;letter-spacing:.04em;
+      font-weight:700;
+      box-shadow:0 6px 27px #092d4a66,0 1.5px 7px #3be3f044;
+      transition:transform .16s, box-shadow .18s;
+      outline:none;cursor:pointer;
+    }
+    .tg-btn:hover {box-shadow:0 12px 32px #58cfff88,0 2px 12px #1779d3aa;transform:scale(1.03);}
+    @media (max-width:700px){
+      .about-block{padding:24px 5vw 15px 6vw;}
+      .lyrics-inner{padding:13px 5vw;}
+      .hero{padding-top:18vw;}
+      .tg-links{flex-direction:column;gap:17px;}
+      .radiohead-title{font-size:11vw;}
+    }
+  </style>
+</head>
+<body>
+  <video id="video-bg" src="bgvideo.mp4" autoplay loop muted playsinline></video>
+  <section class="hero">
+    <h1 class="radiohead-title">RADIOHEAD</h1>
+    <div class="subtitle">Фанатский кинематографичный архив, вдохновленный экспериментальной меланхолией и цифровым брутализмом.</div>
+    <hr class="hero-sep">
+
+    <div class="about-block">
+      Radiohead – это группа, известная своей музыкальной красотой, глубокими экспериментами и постоянным стремлением раздвигать границы жанров. <Br><br><strong>Факты о Radiohead:</strong>
+      <br>Название группы: в честь песни "Radio Head" группы Talking Heads. <Br>Состав: Том Йорк, Джонни Гринвуд, Эд О'Брайен, Колин Гринвуд, Фил Селуэй. <Br>Неожиданный хит: "Creep" был записан по предложению продюсеров. <Br>Цифровые пионеры: выпуск In Rainbows в 2007 по принципу «заплати сколько хочешь». <Br>Том Йорк не умеет читать ноты, несмотря на сложность их музыки. <Br><br>
+      <strong>Красота и экспериментальность:</strong>
+      <br>Постоянный поиск и эволюция звучания. <Br>Многослойность и необычные текстуры. <Br>Слияние рок, электроники, джаза, классики, пост-панка. <Br>Эмоциональное воздействие – темы отчуждения, технологий, тревоги. </Div>
+
+    <!-- Лирика 1 -->
+    <div class="lyrics-block">
+      <img class="lyrics-bg" src="https://i.pinimg.com/originals/7e/46/1c/7e461cae4cb5467e593226089f33b6fb.jpg" alt="background">
+
 <Div class="lyrics-inner animated-lyrics">
         <span>The raindrops, the raindrops, the raindrops, the raindrops</span><br>
         <span>The raindrops, the raindrops, the raindrops, the raindrops</span><br>
@@ -32,8 +250,8 @@
     </div>
 
     <div class="tg-links">
-      <a href="https://t.me/sufferrh" target="_blank" rel="noopener" class="tg-btn">Мой Telegram канал</a>
-      <a href="https://t.me/gdesuffer" target="_blank" rel="noopener" class="tg-btn">Мой Telegram</a>
+      <a href="https://t.me/YOUR_CHANNEL" target="_blank" rel="noopener" class="tg-btn">Мой Telegram-канал</a>
+      <a href="https://t.me/YOUR_USERNAME" target="_blank" rel="noopener" class="tg-btn">Мой Telegram</a>
     </div>
   </section>
   <script>
